@@ -55,7 +55,6 @@ namespace CinemaNetworkApp.WindowFolder.LoadingFolder
         {
             
             InitializeComponent();
-            MessageBox.Show("Ямайка");
             DataContext = this;
 
             rnd = new Random();

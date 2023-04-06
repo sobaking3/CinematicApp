@@ -16,7 +16,7 @@
           <Property Name="OpeningTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="ClosingTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="PhoneOfCinema" Type="nvarchar" MaxLength="11" Nullable="false" />
-          <Property Name="CinemaPhoto" Type="varbinary(max)" />
+          <Property Name="IdShedule" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CinemaPlace">
           <Key>
@@ -36,7 +36,7 @@
           <Property Name="NameCity" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "CinemaNetwork.dbo.Country" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+предупреждение 6002: В таблице или представлении "CinemaNetworkApp.dbo.Country" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="IdCountry" />
@@ -44,22 +44,6 @@
           </Key>
           <Property Name="IdCountry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameCountry" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FilmHire">
-          <Key>
-            <PropertyRef Name="IdFilmHire" />
-          </Key>
-          <Property Name="IdFilmHire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdFilm" Type="int" Nullable="false" />
-          <Property Name="DateOfHire" Type="date" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FilmHireTime">
-          <Key>
-            <PropertyRef Name="IdFilmHireTime" />
-          </Key>
-          <Property Name="IdFilmHireTime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdFilmHire" Type="int" Nullable="false" />
-          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
@@ -71,7 +55,7 @@
           <Property Name="DateOfIssue" Type="date" Nullable="false" />
           <Property Name="AgeLimit" Type="int" Nullable="false" />
           <Property Name="Rating" Type="decimal" Precision="10" Scale="1" Nullable="false" />
-          <Property Name="Duration" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FilmPoster" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Genres">
@@ -82,7 +66,7 @@
           <Property Name="NameGenre" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "CinemaNetwork.dbo.GenresOfFilms" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+предупреждение 6002: В таблице или представлении "CinemaNetworkApp.dbo.GenresOfFilms" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="GenresOfFilms">
           <Key>
             <PropertyRef Name="IdFilm" />
@@ -97,7 +81,6 @@
           </Key>
           <Property Name="IdHall" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="HallName" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="IdPlaceStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Metro">
           <Key>
@@ -105,18 +88,6 @@
           </Key>
           <Property Name="IdMetro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MetroName" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "CinemaNetwork.dbo.PlacesInRownOFHallsInFilmHireTime" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
-        <EntityType Name="PlacesInRownOFHallsInFilmHireTime">
-          <Key>
-            <PropertyRef Name="IdRowsFilmsHireTime" />
-            <PropertyRef Name="Number" />
-            <PropertyRef Name="IdPlaceStatus" />
-          </Key>
-          <Property Name="IdRowsFilmsHireTime" Type="int" Nullable="false" />
-          <Property Name="Number" Type="int" Nullable="false" />
-          <Property Name="IdPlaceStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PlaceStatus">
           <Key>
@@ -132,23 +103,16 @@
           <Property Name="IdRole" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameRole" Type="nvarchar" MaxLength="80" Nullable="false" />
         </EntityType>
-        <EntityType Name="RowsOfHallsInFilmHireTime">
-          <Key>
-            <PropertyRef Name="IdRownFilmsHireTime" />
-          </Key>
-          <Property Name="IdFilmsHireTime" Type="int" Nullable="false" />
-          <Property Name="RowNumber" Type="int" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="IdRownFilmsHireTime" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Seats">
           <Key>
             <PropertyRef Name="IdSeat" />
           </Key>
           <Property Name="IdSeat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RowSeatsNumber" Type="int" Nullable="false" />
+          <Property Name="SeatNumber" Type="int" Nullable="false" />
           <Property Name="IdHall" Type="int" Nullable="false" />
-          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="IdPlaceStatus" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -162,14 +126,13 @@
         </EntityType>
         <EntityType Name="Tickets">
           <Key>
-            <PropertyRef Name="IdFilm" />
+            <PropertyRef Name="IdTicket" />
           </Key>
-          <Property Name="IdTicket" Type="int" Nullable="false" />
+          <Property Name="IdTicket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFilm" Type="int" Nullable="false" />
           <Property Name="StartingDate" Type="datetime" Nullable="false" />
           <Property Name="IdHall" Type="int" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="IdSeat" Type="int" Nullable="false" />
+          <Property Name="IdSeat" Type="int" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -195,18 +158,6 @@
           <Property Name="IdUser" Type="int" Nullable="false" />
           <Property Name="PhotoStaff" Type="varbinary(max)" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cinema_CinemaPlace">
-          <End Role="CinemaPlace" Type="Self.CinemaPlace" Multiplicity="1" />
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CinemaPlace">
-              <PropertyRef Name="IdCinemaPlace" />
-            </Principal>
-            <Dependent Role="Cinema">
-              <PropertyRef Name="IdCinemaPlace" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CinemaPlace_City">
           <End Role="City" Type="Self.City" Multiplicity="1" />
           <End Role="CinemaPlace" Type="Self.CinemaPlace" Multiplicity="*" />
@@ -243,30 +194,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FilmHire_Films">
-          <End Role="Films" Type="Self.Films" Multiplicity="1" />
-          <End Role="FilmHire" Type="Self.FilmHire" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Films">
-              <PropertyRef Name="IdFilm" />
-            </Principal>
-            <Dependent Role="FilmHire">
-              <PropertyRef Name="IdFilm" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilmHireTime_FilmHire">
-          <End Role="FilmHire" Type="Self.FilmHire" Multiplicity="1" />
-          <End Role="FilmHireTime" Type="Self.FilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FilmHire">
-              <PropertyRef Name="IdFilmHire" />
-            </Principal>
-            <Dependent Role="FilmHireTime">
-              <PropertyRef Name="IdFilmHire" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_GenresOfFilms_Films">
           <End Role="Films" Type="Self.Films" Multiplicity="1" />
           <End Role="GenresOfFilms" Type="Self.GenresOfFilms" Multiplicity="*" />
@@ -291,43 +218,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Halls_PlaceStatus">
-          <End Role="PlaceStatus" Type="Self.PlaceStatus" Multiplicity="1" />
-          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlaceStatus">
-              <PropertyRef Name="IdPlaceStatus" />
-            </Principal>
-            <Dependent Role="Halls">
-              <PropertyRef Name="IdPlaceStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime">
-          <End Role="RowsOfHallsInFilmHireTime" Type="Self.RowsOfHallsInFilmHireTime" Multiplicity="1" />
-          <End Role="PlacesInRownOFHallsInFilmHireTime" Type="Self.PlacesInRownOFHallsInFilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RowsOfHallsInFilmHireTime">
-              <PropertyRef Name="IdRownFilmsHireTime" />
-            </Principal>
-            <Dependent Role="PlacesInRownOFHallsInFilmHireTime">
-              <PropertyRef Name="IdRowsFilmsHireTime" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RowsOfHallsInFilmHireTime_FilmHireTime">
-          <End Role="FilmHireTime" Type="Self.FilmHireTime" Multiplicity="1" />
-          <End Role="RowsOfHallsInFilmHireTime" Type="Self.RowsOfHallsInFilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FilmHireTime">
-              <PropertyRef Name="IdFilmHireTime" />
-            </Principal>
-            <Dependent Role="RowsOfHallsInFilmHireTime">
-              <PropertyRef Name="IdFilmsHireTime" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Seats_Halls">
+        <Association Name="FK_Seats_Halls1">
           <End Role="Halls" Type="Self.Halls" Multiplicity="1" />
           <End Role="Seats" Type="Self.Seats" Multiplicity="*" />
           <ReferentialConstraint>
@@ -339,8 +230,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Seats_PlaceStatus">
+          <End Role="PlaceStatus" Type="Self.PlaceStatus" Multiplicity="1" />
+          <End Role="Seats" Type="Self.Seats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceStatus">
+              <PropertyRef Name="IdPlaceStatus" />
+            </Principal>
+            <Dependent Role="Seats">
+              <PropertyRef Name="IdPlaceStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tickets_Seats">
-          <End Role="Seats" Type="Self.Seats" Multiplicity="1" />
+          <End Role="Seats" Type="Self.Seats" Multiplicity="0..1" />
           <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seats">
@@ -391,15 +294,12 @@
           <EntitySet Name="Cinema" EntityType="Self.Cinema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CinemaPlace" EntityType="Self.CinemaPlace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FilmHire" EntityType="Self.FilmHire" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FilmHireTime" EntityType="Self.FilmHireTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Metro" EntityType="Self.Metro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlaceStatus" EntityType="Self.PlaceStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RowsOfHallsInFilmHireTime" EntityType="Self.RowsOfHallsInFilmHireTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Seats" EntityType="Self.Seats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
@@ -417,17 +317,6 @@
     [GenresOfFilms].[IdGenre] AS [IdGenre]
     FROM [dbo].[GenresOfFilms] AS [GenresOfFilms]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="PlacesInRownOFHallsInFilmHireTime" EntityType="Self.PlacesInRownOFHallsInFilmHireTime" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PlacesInRownOFHallsInFilmHireTime].[IdRowsFilmsHireTime] AS [IdRowsFilmsHireTime], 
-    [PlacesInRownOFHallsInFilmHireTime].[Number] AS [Number], 
-    [PlacesInRownOFHallsInFilmHireTime].[IdPlaceStatus] AS [IdPlaceStatus]
-    FROM [dbo].[PlacesInRownOFHallsInFilmHireTime] AS [PlacesInRownOFHallsInFilmHireTime]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_Cinema_CinemaPlace" Association="Self.FK_Cinema_CinemaPlace">
-            <End Role="CinemaPlace" EntitySet="CinemaPlace" />
-            <End Role="Cinema" EntitySet="Cinema" />
-          </AssociationSet>
           <AssociationSet Name="FK_CinemaPlace_City" Association="Self.FK_CinemaPlace_City">
             <End Role="City" EntitySet="City" />
             <End Role="CinemaPlace" EntitySet="CinemaPlace" />
@@ -440,14 +329,6 @@
             <End Role="CinemaPlace" EntitySet="CinemaPlace" />
             <End Role="Country" EntitySet="Country" />
           </AssociationSet>
-          <AssociationSet Name="FK_FilmHire_Films" Association="Self.FK_FilmHire_Films">
-            <End Role="Films" EntitySet="Films" />
-            <End Role="FilmHire" EntitySet="FilmHire" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FilmHireTime_FilmHire" Association="Self.FK_FilmHireTime_FilmHire">
-            <End Role="FilmHire" EntitySet="FilmHire" />
-            <End Role="FilmHireTime" EntitySet="FilmHireTime" />
-          </AssociationSet>
           <AssociationSet Name="FK_GenresOfFilms_Films" Association="Self.FK_GenresOfFilms_Films">
             <End Role="Films" EntitySet="Films" />
             <End Role="GenresOfFilms" EntitySet="GenresOfFilms" />
@@ -456,20 +337,12 @@
             <End Role="Genres" EntitySet="Genres" />
             <End Role="GenresOfFilms" EntitySet="GenresOfFilms" />
           </AssociationSet>
-          <AssociationSet Name="FK_Halls_PlaceStatus" Association="Self.FK_Halls_PlaceStatus">
+          <AssociationSet Name="FK_Seats_Halls1" Association="Self.FK_Seats_Halls1">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Seats" EntitySet="Seats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seats_PlaceStatus" Association="Self.FK_Seats_PlaceStatus">
             <End Role="PlaceStatus" EntitySet="PlaceStatus" />
-            <End Role="Halls" EntitySet="Halls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime" Association="Self.FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime">
-            <End Role="RowsOfHallsInFilmHireTime" EntitySet="RowsOfHallsInFilmHireTime" />
-            <End Role="PlacesInRownOFHallsInFilmHireTime" EntitySet="PlacesInRownOFHallsInFilmHireTime" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RowsOfHallsInFilmHireTime_FilmHireTime" Association="Self.FK_RowsOfHallsInFilmHireTime_FilmHireTime">
-            <End Role="FilmHireTime" EntitySet="FilmHireTime" />
-            <End Role="RowsOfHallsInFilmHireTime" EntitySet="RowsOfHallsInFilmHireTime" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Seats_Halls" Association="Self.FK_Seats_Halls">
-            <End Role="Halls" EntitySet="Halls" />
             <End Role="Seats" EntitySet="Seats" />
           </AssociationSet>
           <AssociationSet Name="FK_Tickets_Seats" Association="Self.FK_Tickets_Seats">
@@ -505,8 +378,7 @@
           <Property Name="OpeningTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="ClosingTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="PhoneOfCinema" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CinemaPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="CinemaPlace" Relationship="Self.FK_Cinema_CinemaPlace" FromRole="Cinema" ToRole="CinemaPlace" />
+          <Property Name="IdShedule" Type="Int32" Nullable="false" />
           <NavigationProperty Name="WorkerInfo" Relationship="Self.FK_WorkerInfo_Cinema" FromRole="Cinema" ToRole="WorkerInfo" />
         </EntityType>
         <EntityType Name="CinemaPlace">
@@ -518,7 +390,6 @@
           <Property Name="ShoppingCenter" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdCity" Type="Int32" Nullable="false" />
           <Property Name="HouseNumber" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cinema" Relationship="Self.FK_Cinema_CinemaPlace" FromRole="CinemaPlace" ToRole="Cinema" />
           <NavigationProperty Name="City" Relationship="Self.FK_CinemaPlace_City" FromRole="CinemaPlace" ToRole="City" />
           <NavigationProperty Name="Metro" Relationship="Self.FK_CinemaPlace_Metro" FromRole="CinemaPlace" ToRole="Metro" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Country_CinemaAdress" FromRole="CinemaPlace" ToRole="Country" />
@@ -531,26 +402,6 @@
           <Property Name="NameCity" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CinemaPlace" Relationship="Self.FK_CinemaPlace_City" FromRole="City" ToRole="CinemaPlace" />
         </EntityType>
-        <EntityType Name="FilmHire">
-          <Key>
-            <PropertyRef Name="IdFilmHire" />
-          </Key>
-          <Property Name="IdFilmHire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdFilm" Type="Int32" Nullable="false" />
-          <Property Name="DateOfHire" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Films" Relationship="Self.FK_FilmHire_Films" FromRole="FilmHire" ToRole="Films" />
-          <NavigationProperty Name="FilmHireTime" Relationship="Self.FK_FilmHireTime_FilmHire" FromRole="FilmHire" ToRole="FilmHireTime" />
-        </EntityType>
-        <EntityType Name="FilmHireTime">
-          <Key>
-            <PropertyRef Name="IdFilmHireTime" />
-          </Key>
-          <Property Name="IdFilmHireTime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdFilmHire" Type="Int32" Nullable="false" />
-          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="FilmHire" Relationship="Self.FK_FilmHireTime_FilmHire" FromRole="FilmHireTime" ToRole="FilmHire" />
-          <NavigationProperty Name="RowsOfHallsInFilmHireTime" Relationship="Self.FK_RowsOfHallsInFilmHireTime_FilmHireTime" FromRole="FilmHireTime" ToRole="RowsOfHallsInFilmHireTime" />
-        </EntityType>
         <EntityType Name="Films">
           <Key>
             <PropertyRef Name="IdFilm" />
@@ -561,9 +412,8 @@
           <Property Name="DateOfIssue" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AgeLimit" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Decimal" Precision="10" Scale="1" Nullable="false" />
-          <Property Name="Duration" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FilmPoster" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="FilmHire" Relationship="Self.FK_FilmHire_Films" FromRole="Films" ToRole="FilmHire" />
           <NavigationProperty Name="Genres" Relationship="Self.GenresOfFilms" FromRole="Films" ToRole="Genres" />
         </EntityType>
         <EntityType Name="Genres">
@@ -580,9 +430,7 @@
           </Key>
           <Property Name="IdHall" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HallName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdPlaceStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PlaceStatus" Relationship="Self.FK_Halls_PlaceStatus" FromRole="Halls" ToRole="PlaceStatus" />
-          <NavigationProperty Name="Seats" Relationship="Self.FK_Seats_Halls" FromRole="Halls" ToRole="Seats" />
+          <NavigationProperty Name="Seats" Relationship="Self.FK_Seats_Halls1" FromRole="Halls" ToRole="Seats" />
         </EntityType>
         <EntityType Name="Metro">
           <Key>
@@ -598,7 +446,7 @@
           </Key>
           <Property Name="IdPlaceStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PlaceStatus1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Halls" Relationship="Self.FK_Halls_PlaceStatus" FromRole="PlaceStatus" ToRole="Halls" />
+          <NavigationProperty Name="Seats" Relationship="Self.FK_Seats_PlaceStatus" FromRole="PlaceStatus" ToRole="Seats" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -608,26 +456,18 @@
           <Property Name="NameRole" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserTable_RoleTable" FromRole="Role" ToRole="User" />
         </EntityType>
-        <EntityType Name="RowsOfHallsInFilmHireTime">
-          <Key>
-            <PropertyRef Name="IdRownFilmsHireTime" />
-          </Key>
-          <Property Name="IdFilmsHireTime" Type="Int32" Nullable="false" />
-          <Property Name="RowNumber" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="IdRownFilmsHireTime" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FilmHireTime" Relationship="Self.FK_RowsOfHallsInFilmHireTime_FilmHireTime" FromRole="RowsOfHallsInFilmHireTime" ToRole="FilmHireTime" />
-          <NavigationProperty Name="PlacesInRownOFHallsInFilmHireTime" Relationship="Self.FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime" FromRole="RowsOfHallsInFilmHireTime" ToRole="PlacesInRownOFHallsInFilmHireTime" />
-        </EntityType>
         <EntityType Name="Seats">
           <Key>
             <PropertyRef Name="IdSeat" />
           </Key>
           <Property Name="IdSeat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RowSeatsNumber" Type="Int32" Nullable="false" />
+          <Property Name="SeatNumber" Type="Int32" Nullable="false" />
           <Property Name="IdHall" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Halls" Relationship="Self.FK_Seats_Halls" FromRole="Seats" ToRole="Halls" />
+          <Property Name="IdPlaceStatus" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Seats_Halls1" FromRole="Seats" ToRole="Halls" />
+          <NavigationProperty Name="PlaceStatus" Relationship="Self.FK_Seats_PlaceStatus" FromRole="Seats" ToRole="PlaceStatus" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Seats" FromRole="Seats" ToRole="Tickets" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -642,14 +482,13 @@
         </EntityType>
         <EntityType Name="Tickets">
           <Key>
-            <PropertyRef Name="IdFilm" />
+            <PropertyRef Name="IdTicket" />
           </Key>
-          <Property Name="IdTicket" Type="Int32" Nullable="false" />
+          <Property Name="IdTicket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFilm" Type="Int32" Nullable="false" />
           <Property Name="StartingDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdHall" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="IdSeat" Type="Int32" Nullable="false" />
+          <Property Name="IdSeat" Type="Int32" />
           <NavigationProperty Name="Seats" Relationship="Self.FK_Tickets_Seats" FromRole="Tickets" ToRole="Seats" />
         </EntityType>
         <EntityType Name="User">
@@ -689,29 +528,6 @@
           <Property Name="NameCountry" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CinemaPlace" Relationship="Self.FK_Country_CinemaAdress" FromRole="Country" ToRole="CinemaPlace" />
         </EntityType>
-        <EntityType Name="PlacesInRownOFHallsInFilmHireTime">
-          <Key>
-            <PropertyRef Name="IdRowsFilmsHireTime" />
-            <PropertyRef Name="Number" />
-            <PropertyRef Name="IdPlaceStatus" />
-          </Key>
-          <Property Name="IdRowsFilmsHireTime" Type="Int32" Nullable="false" />
-          <Property Name="Number" Type="Int32" Nullable="false" />
-          <Property Name="IdPlaceStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RowsOfHallsInFilmHireTime" Relationship="Self.FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime" FromRole="PlacesInRownOFHallsInFilmHireTime" ToRole="RowsOfHallsInFilmHireTime" />
-        </EntityType>
-        <Association Name="FK_Cinema_CinemaPlace">
-          <End Role="CinemaPlace" Type="Self.CinemaPlace" Multiplicity="1" />
-          <End Role="Cinema" Type="Self.Cinema" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CinemaPlace">
-              <PropertyRef Name="IdCinemaPlace" />
-            </Principal>
-            <Dependent Role="Cinema">
-              <PropertyRef Name="IdCinemaPlace" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WorkerInfo_Cinema">
           <End Role="Cinema" Type="Self.Cinema" Multiplicity="1" />
           <End Role="WorkerInfo" Type="Self.WorkerInfo" Multiplicity="*" />
@@ -760,55 +576,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FilmHire_Films">
-          <End Role="Films" Type="Self.Films" Multiplicity="1" />
-          <End Role="FilmHire" Type="Self.FilmHire" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Films">
-              <PropertyRef Name="IdFilm" />
-            </Principal>
-            <Dependent Role="FilmHire">
-              <PropertyRef Name="IdFilm" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FilmHireTime_FilmHire">
-          <End Role="FilmHire" Type="Self.FilmHire" Multiplicity="1" />
-          <End Role="FilmHireTime" Type="Self.FilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FilmHire">
-              <PropertyRef Name="IdFilmHire" />
-            </Principal>
-            <Dependent Role="FilmHireTime">
-              <PropertyRef Name="IdFilmHire" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RowsOfHallsInFilmHireTime_FilmHireTime">
-          <End Role="FilmHireTime" Type="Self.FilmHireTime" Multiplicity="1" />
-          <End Role="RowsOfHallsInFilmHireTime" Type="Self.RowsOfHallsInFilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FilmHireTime">
-              <PropertyRef Name="IdFilmHireTime" />
-            </Principal>
-            <Dependent Role="RowsOfHallsInFilmHireTime">
-              <PropertyRef Name="IdFilmsHireTime" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Halls_PlaceStatus">
-          <End Role="PlaceStatus" Type="Self.PlaceStatus" Multiplicity="1" />
-          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PlaceStatus">
-              <PropertyRef Name="IdPlaceStatus" />
-            </Principal>
-            <Dependent Role="Halls">
-              <PropertyRef Name="IdPlaceStatus" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Seats_Halls">
+        <Association Name="FK_Seats_Halls1">
           <End Role="Halls" Type="Self.Halls" Multiplicity="1" />
           <End Role="Seats" Type="Self.Seats" Multiplicity="*" />
           <ReferentialConstraint>
@@ -817,6 +585,18 @@
             </Principal>
             <Dependent Role="Seats">
               <PropertyRef Name="IdHall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seats_PlaceStatus">
+          <End Role="PlaceStatus" Type="Self.PlaceStatus" Multiplicity="1" />
+          <End Role="Seats" Type="Self.Seats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlaceStatus">
+              <PropertyRef Name="IdPlaceStatus" />
+            </Principal>
+            <Dependent Role="Seats">
+              <PropertyRef Name="IdPlaceStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -832,20 +612,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime">
-          <End Role="RowsOfHallsInFilmHireTime" Type="Self.RowsOfHallsInFilmHireTime" Multiplicity="1" />
-          <End Role="PlacesInRownOFHallsInFilmHireTime" Type="Self.PlacesInRownOFHallsInFilmHireTime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RowsOfHallsInFilmHireTime">
-              <PropertyRef Name="IdRownFilmsHireTime" />
-            </Principal>
-            <Dependent Role="PlacesInRownOFHallsInFilmHireTime">
-              <PropertyRef Name="IdRowsFilmsHireTime" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Tickets_Seats">
-          <End Role="Seats" Type="Self.Seats" Multiplicity="1" />
+          <End Role="Seats" Type="Self.Seats" Multiplicity="0..1" />
           <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Seats">
@@ -876,26 +644,18 @@
           <EntitySet Name="Cinema" EntityType="Self.Cinema" />
           <EntitySet Name="CinemaPlace" EntityType="Self.CinemaPlace" />
           <EntitySet Name="City" EntityType="Self.City" />
-          <EntitySet Name="FilmHire" EntityType="Self.FilmHire" />
-          <EntitySet Name="FilmHireTime" EntityType="Self.FilmHireTime" />
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
           <EntitySet Name="Metro" EntityType="Self.Metro" />
           <EntitySet Name="PlaceStatus" EntityType="Self.PlaceStatus" />
           <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="RowsOfHallsInFilmHireTime" EntityType="Self.RowsOfHallsInFilmHireTime" />
           <EntitySet Name="Seats" EntityType="Self.Seats" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="WorkerInfo" EntityType="Self.WorkerInfo" />
           <EntitySet Name="Country" EntityType="Self.Country" />
-          <EntitySet Name="PlacesInRownOFHallsInFilmHireTime" EntityType="Self.PlacesInRownOFHallsInFilmHireTime" />
-          <AssociationSet Name="FK_Cinema_CinemaPlace" Association="Self.FK_Cinema_CinemaPlace">
-            <End Role="CinemaPlace" EntitySet="CinemaPlace" />
-            <End Role="Cinema" EntitySet="Cinema" />
-          </AssociationSet>
           <AssociationSet Name="FK_WorkerInfo_Cinema" Association="Self.FK_WorkerInfo_Cinema">
             <End Role="Cinema" EntitySet="Cinema" />
             <End Role="WorkerInfo" EntitySet="WorkerInfo" />
@@ -912,33 +672,17 @@
             <End Role="CinemaPlace" EntitySet="CinemaPlace" />
             <End Role="Country" EntitySet="Country" />
           </AssociationSet>
-          <AssociationSet Name="FK_FilmHire_Films" Association="Self.FK_FilmHire_Films">
-            <End Role="Films" EntitySet="Films" />
-            <End Role="FilmHire" EntitySet="FilmHire" />
+          <AssociationSet Name="FK_Seats_Halls1" Association="Self.FK_Seats_Halls1">
+            <End Role="Halls" EntitySet="Halls" />
+            <End Role="Seats" EntitySet="Seats" />
           </AssociationSet>
-          <AssociationSet Name="FK_FilmHireTime_FilmHire" Association="Self.FK_FilmHireTime_FilmHire">
-            <End Role="FilmHire" EntitySet="FilmHire" />
-            <End Role="FilmHireTime" EntitySet="FilmHireTime" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RowsOfHallsInFilmHireTime_FilmHireTime" Association="Self.FK_RowsOfHallsInFilmHireTime_FilmHireTime">
-            <End Role="FilmHireTime" EntitySet="FilmHireTime" />
-            <End Role="RowsOfHallsInFilmHireTime" EntitySet="RowsOfHallsInFilmHireTime" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Halls_PlaceStatus" Association="Self.FK_Halls_PlaceStatus">
+          <AssociationSet Name="FK_Seats_PlaceStatus" Association="Self.FK_Seats_PlaceStatus">
             <End Role="PlaceStatus" EntitySet="PlaceStatus" />
-            <End Role="Halls" EntitySet="Halls" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Seats_Halls" Association="Self.FK_Seats_Halls">
-            <End Role="Halls" EntitySet="Halls" />
             <End Role="Seats" EntitySet="Seats" />
           </AssociationSet>
           <AssociationSet Name="FK_UserTable_RoleTable" Association="Self.FK_UserTable_RoleTable">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime" Association="Self.FK_PlacesInRownOFHallsInFilmHireTime_RowsOfHallsInFilmHireTime">
-            <End Role="RowsOfHallsInFilmHireTime" EntitySet="RowsOfHallsInFilmHireTime" />
-            <End Role="PlacesInRownOFHallsInFilmHireTime" EntitySet="PlacesInRownOFHallsInFilmHireTime" />
           </AssociationSet>
           <AssociationSet Name="FK_Tickets_Seats" Association="Self.FK_Tickets_Seats">
             <End Role="Seats" EntitySet="Seats" />
@@ -969,7 +713,7 @@
                 <ScalarProperty Name="OpeningTime" ColumnName="OpeningTime" />
                 <ScalarProperty Name="ClosingTime" ColumnName="ClosingTime" />
                 <ScalarProperty Name="PhoneOfCinema" ColumnName="PhoneOfCinema" />
-                <ScalarProperty Name="CinemaPhoto" ColumnName="CinemaPhoto" />
+                <ScalarProperty Name="IdShedule" ColumnName="IdShedule" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -989,24 +733,6 @@
               <MappingFragment StoreEntitySet="City">
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
                 <ScalarProperty Name="NameCity" ColumnName="NameCity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FilmHire">
-            <EntityTypeMapping TypeName="DBModel.FilmHire">
-              <MappingFragment StoreEntitySet="FilmHire">
-                <ScalarProperty Name="IdFilmHire" ColumnName="IdFilmHire" />
-                <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
-                <ScalarProperty Name="DateOfHire" ColumnName="DateOfHire" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FilmHireTime">
-            <EntityTypeMapping TypeName="DBModel.FilmHireTime">
-              <MappingFragment StoreEntitySet="FilmHireTime">
-                <ScalarProperty Name="IdFilmHireTime" ColumnName="IdFilmHireTime" />
-                <ScalarProperty Name="IdFilmHire" ColumnName="IdFilmHire" />
-                <ScalarProperty Name="Time" ColumnName="Time" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1037,7 +763,6 @@
               <MappingFragment StoreEntitySet="Halls">
                 <ScalarProperty Name="IdHall" ColumnName="IdHall" />
                 <ScalarProperty Name="HallName" ColumnName="HallName" />
-                <ScalarProperty Name="IdPlaceStatus" ColumnName="IdPlaceStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1065,22 +790,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RowsOfHallsInFilmHireTime">
-            <EntityTypeMapping TypeName="DBModel.RowsOfHallsInFilmHireTime">
-              <MappingFragment StoreEntitySet="RowsOfHallsInFilmHireTime">
-                <ScalarProperty Name="IdFilmsHireTime" ColumnName="IdFilmsHireTime" />
-                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="IdRownFilmsHireTime" ColumnName="IdRownFilmsHireTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Seats">
             <EntityTypeMapping TypeName="DBModel.Seats">
               <MappingFragment StoreEntitySet="Seats">
                 <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
                 <ScalarProperty Name="RowSeatsNumber" ColumnName="RowSeatsNumber" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
                 <ScalarProperty Name="IdHall" ColumnName="IdHall" />
+                <ScalarProperty Name="IdPlaceStatus" ColumnName="IdPlaceStatus" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1103,7 +820,6 @@
                 <ScalarProperty Name="IdFilm" ColumnName="IdFilm" />
                 <ScalarProperty Name="StartingDate" ColumnName="StartingDate" />
                 <ScalarProperty Name="IdHall" ColumnName="IdHall" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="IdSeat" ColumnName="IdSeat" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1139,15 +855,6 @@
               <MappingFragment StoreEntitySet="Country">
                 <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
                 <ScalarProperty Name="NameCountry" ColumnName="NameCountry" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlacesInRownOFHallsInFilmHireTime">
-            <EntityTypeMapping TypeName="DBModel.PlacesInRownOFHallsInFilmHireTime">
-              <MappingFragment StoreEntitySet="PlacesInRownOFHallsInFilmHireTime">
-                <ScalarProperty Name="IdRowsFilmsHireTime" ColumnName="IdRowsFilmsHireTime" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="IdPlaceStatus" ColumnName="IdPlaceStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

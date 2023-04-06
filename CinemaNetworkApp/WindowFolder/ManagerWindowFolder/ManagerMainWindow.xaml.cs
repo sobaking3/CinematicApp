@@ -101,7 +101,7 @@ namespace CinemaNetworkApp.WindowFolder.ManagerWindowFolder
 
         private void ListTickets_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Navigate(new ListFilms());
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

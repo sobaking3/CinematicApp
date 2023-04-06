@@ -140,12 +140,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DataFolder\FilmHire.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataFolder\FilmHireTime.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataFolder\Films.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -158,16 +152,10 @@
     <Compile Include="DataFolder\Metro.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataFolder\PlacesInRownOFHallsInFilmHireTime.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataFolder\PlaceStatus.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\Role.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataFolder\RowsOfHallsInFilmHireTime.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\Seats.cs">
@@ -214,6 +202,9 @@
     </Compile>
     <Compile Include="PageFolder\ManagerPageFolder\ListFilms.xaml.cs">
       <DependentUpon>ListFilms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\ManagerPageFolder\ListTickets.xaml.cs">
+      <DependentUpon>ListTickets.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowFolder\AdminWindowFolder\AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
@@ -313,6 +304,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\ManagerPageFolder\ListTickets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceFolder\Dictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,18 +348,16 @@
     <Resource Include="ResourceFolder\Icons\Lock.png" />
     <Resource Include="ResourceFolder\Icons\User.png" />
     <Resource Include="ResourceFolder\background.png" />
-    <Resource Include="ResourceFolder\close.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ResourceFolder\ERD.png" />
     <Content Include="DataFolder\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
       <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataFolder\DBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -379,7 +372,6 @@
     <Resource Include="ResourceFolder\testAlexPhoto.jpg" />
     <Resource Include="ResourceFolder\IconImage.ico" />
     <Resource Include="IconImage.ico" />
-    <Content Include="ResourceFolder\scriptik.sql" />
     <Resource Include="ResourceFolder\LoadingBackground.png" />
   </ItemGroup>
   <ItemGroup>
