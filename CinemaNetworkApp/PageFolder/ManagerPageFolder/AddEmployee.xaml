@@ -1,0 +1,202 @@
+﻿<Page x:Class="CinemaNetworkApp.PageFolder.ManagerPageFolder.AddEmployee"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CinemaNetworkApp.PageFolder.ManagerPageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="800"
+      Title="Добавление сотрудника">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="70"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="10"/>
+                
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="10"/>
+
+                <RowDefinition Height="70"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Фамилия"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="1" Grid.Row="1"/>
+
+            <TextBox x:Name="LastNameTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="1"
+                 Grid.Column="2"
+                     />
+
+            <Label Content="Имя"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="1" Grid.Row="3"/>
+
+        <TextBox x:Name="FirstNameTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="3"
+                 Grid.Column="2"/>
+
+            <Label Content="Отчество"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="1" Grid.Row="5"/>
+
+        <TextBox x:Name="MiddleNameTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="5"
+                 Grid.Column="2"/>
+
+            <Label Content="Логин"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="1" Grid.Row="9"/>
+
+        <TextBox x:Name="LoginTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="9"
+                 Grid.Column="2"/>
+
+        <Label Content="Дата рождения"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="1" Grid.Row="7"/>
+
+
+        <DatePicker x:Name="DatePickerTb" SelectedDate="{Binding DateOfBirth}"
+                    Grid.Column="2" Grid.Row="7" BorderBrush="DarkGray" Foreground="Black">
+            <DatePicker.CalendarStyle>
+                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#373A6B" />
+                    </Style.Resources>
+                </Style>
+            </DatePicker.CalendarStyle>
+
+        </DatePicker>
+
+
+        <Label Content="Пароль"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="3" Grid.Row="1"/>
+
+        <TextBox x:Name="PasswordPb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="1"
+                 Grid.Column="4"/>
+
+            <Label Content="Телефон"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="3" Grid.Row="3"/>
+
+        <TextBox x:Name="NumberTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="3"
+                 Grid.Column="4"/>
+
+            <Label Content="Email"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="3" Grid.Row="5"/>
+
+        <TextBox x:Name="EmailTb" Style="{DynamicResource TBStyle}"
+                 Grid.Row="5"
+                 Grid.Column="4"/>
+
+        <Label Content="Кинотеатр"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="3" Grid.Row="7"/>
+
+        <ComboBox x:Name="CinemaCb"
+                 Grid.Row="7" Foreground="White"
+                  Background="Transparent"
+                 Grid.Column="4"
+                  SelectedValuePath="IdCinema"
+                 DisplayMemberPath="CinemaName"
+                  BorderBrush="DarkGray">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Background" Value="DarkBlue"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+
+        <Label Content="Роль"
+               Style="{DynamicResource NormalLabel}"
+               Grid.Column="3" Grid.Row="9"/>
+        
+        <ComboBox x:Name="RoleCb"
+                 Grid.Row="9" Foreground="White"
+                  Background="Transparent"
+                 Grid.Column="4"
+                  SelectedValuePath="IdRole"
+                 DisplayMemberPath="NameRole"
+                  BorderBrush="DarkGray">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Background" Value="DarkBlue"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        
+        
+        
+        <Button x:Name="AddUserBtn" Grid.Row="11" Grid.Column="2"
+            Content="Добавить" Click="AddUserBtn_Click"
+            Height="50"  Style="{DynamicResource ButtonLogInStyle}">
+            <Button.Template>
+
+                <ControlTemplate TargetType="Button">
+                    <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="AddImgBtn" Grid.Row="11" Grid.Column="4"
+            Content="Загрузить аватар" Click="AddImgBtn_Click"
+            Height="50" Style="{DynamicResource ButtonLogInStyle}">
+            <Button.Template>
+
+                <ControlTemplate TargetType="Button">
+                    <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Border Grid.Row="2" 
+                Grid.Column="6" Grid.RowSpan="6"
+                CornerRadius="10"
+                BorderThickness="2"
+                Opacity="0.8">
+            
+            <Image x:Name="ImPhoto"/>
+            
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+
+            </Border.BorderBrush>
+        </Border>
+    </Grid>
+</Page>
