@@ -364,11 +364,11 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ResourceFolder\скрипт.sql" />
     <Content Include="Updater.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="ResourceFolder\Profile_Image.png" />
-    <Content Include="ResourceFolder\scriptik2.sql" />
     <Resource Include="ResourceFolder\testAlexPhoto.jpg" />
     <Resource Include="ResourceFolder\IconImage.ico" />
     <Resource Include="IconImage.ico" />
